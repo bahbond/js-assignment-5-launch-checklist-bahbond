@@ -16,9 +16,11 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
    */
 }
 
+
+    
 function validateInput(testInput) {
     //check is string is empty
-    if (testInput.trim()===""){
+    if ((testInput) === "") {
      return "Empty";
       }
       //check "not" is not a number
@@ -29,10 +31,14 @@ function validateInput(testInput) {
          return "Is not a number";
      }
  };
-
+console.log(validateInput());
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
    
-}
+
+   
+   
+ 
+};
 
 async function myFetch() {
     let planetsReturned;
