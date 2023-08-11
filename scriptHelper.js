@@ -40,7 +40,7 @@ function formSubmission(document, list, pilotName, coPilotName, fuelLevel, cargo
         alert("All fields are required!");
     }
     else if(
-        validateInput(fuelLevel.value) ==="Is not a number" || validateInput(cargoMass.value) === "Is not a number"
+        validateInput(fuelLevel.value) ==="Not a number" || validateInput(cargoMass.value) === "Not a number"
     ) {
         alert("Cargo Mass and Fuel Level Inputs must be a number");
     } else{
