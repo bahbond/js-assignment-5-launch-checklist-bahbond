@@ -4,21 +4,21 @@ require('isomorphic-fetch');
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
 
     let missionTarget = document.getElementById("missionTarget");
-//    Here is the HTML formatting for our mission target div.
+ //  Here is the HTML formatting for our mission target div.
+   missionTarget.innerHTML =`
+
    
-//                 <h2>Mission Destination</h2>
-//                 <ol>
-//                     <li>Name: </li>
-//                     <li>Diameter: </li>
-//                     <li>Star: ${star}</li>
-//                     <li>Distance from Earth: </li>
-//                     <li>Number of Moons: </li>
-//                 </ol>
-//                 <img src="">
-  
+                <h2>Mission Destination</h2>
+                <ol>
+                    <li>Name:${name} </li>
+                    <li>Diameter:${diameter} </li>
+                    <li>Star: ${star}</li>
+                    <li>Distance from Earth:${distance} </li>
+                    <li>Number of Moons:${moons} </li>
+                </ol>
+                <img src="${imageUrl}">
+                `
 }
-
-
     
 function validateInput(input) {
     //check is string is empty
@@ -29,7 +29,7 @@ function validateInput(input) {
      else if (!isNaN(input)){
          return "Is a number";
      } 
-     else return "Is not a number";
+     else return "Not a number";
      
  };
 function formSubmission(document, list, pilotName, coPilotName, fuelLevel, cargoMass) {
@@ -56,8 +56,8 @@ function formSubmission(document, list, pilotName, coPilotName, fuelLevel, cargo
 
         pilotStatus.innerHTML =`Pilot ${pilotName.value} is ready for launch`;
         copilotStatus.innerHTML = `CoPilot ${coPilotName.value} is ready for launch`;
-        fuelStatus.innerHTML = `Fuel Status passes checks.`;
-        cargoStatus.innerHTML = `Cargo status passes checks`
+        fuelStatus.innerHTML = `Fuel level high enough for launch`;
+        cargoStatus.innerHTML = `Cargo mass low enough for launch`
 //output for fuel level below 10000
         if(fuelLevel.value <10000) {
             list.style.visibility ="visible";
@@ -89,19 +89,24 @@ function formSubmission(document, list, pilotName, coPilotName, fuelLevel, cargo
 
 
 async function myFetch() {
-    let planetsReturned;
+    
+let response = await fetch("https://handlers.education.launchcode.org/static/planets.json");
+let planetsReturned = await response.json();
 
-   planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-    return response.json();   
-});
+//  let planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+//      response.json() .then(function(json){
+//         console.log(json);
+//      })
+// });
 
     return planetsReturned;
 }
 
 function pickPlanet(planets) {
-    let planet =planets[Math.floor(Math.random() * planets.length_)];
+    let planet = planets[Math.floor(Math.random() * planets.length)];
+    console.log(planet);
+return planet;
 }
-
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
 module.exports.formSubmission = formSubmission;
